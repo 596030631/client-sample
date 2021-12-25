@@ -52,6 +52,8 @@ class TimePersonFragment : Fragment() {
             },
             { holder, position ->
                 holder.binding.labelOrderId.text = viewModel.dataList[position].orderId
+                holder.binding.imgOrder.text = "$position"
+                holder.binding.labelOperator.setText(viewModel.dataList[position].operator)
             }
         )
     }
