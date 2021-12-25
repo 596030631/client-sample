@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.shuaijun.client.ui.login.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/login_navigation_main"
+            app:destination="@id/mainFragment">
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.shuaijun.client.ui.main.HomeFragment"
+        android:label="fragment_main">
+        <action
+            android:id="@+id/main_navigation_order_add"
+            app:destination="@id/orderAddFragment" />
+        <action
+            android:id="@+id/main_navigation_order_predict"
+            app:destination="@id/orderPredictFragment" />
+        <action
+            android:id="@+id/main_navigation_order_manager"
+            app:destination="@id/orderManagerFragment" />
+        <action
+            android:id="@+id/main_navigation_time_person"
+            app:destination="@id/timePersonFragment" />
+        <action
+            android:id="@+id/main_navigation_time_machine"
+            app:destination="@id/timeMachineFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderAddFragment"
+        android:name="com.shuaijun.client.ui.order.OrderAddFragment"
+        android:label="order_add_fragment"
+        tools:layout="@layout/fragment_order_add" />
+
+    <fragment
+        android:id="@+id/orderPredictFragment"
+        android:name="com.shuaijun.client.ui.order.OrderPredictFragment"
+        android:label="fragment_order_predict"
+        tools:layout="@layout/fragment_order_predict" />
+
+    <fragment
+        android:id="@+id/orderManagerFragment"
+        android:name="com.shuaijun.client.ui.order.OrderManagerFragment"
+        android:label="fragment_order_manager"
+        tools:layout="@layout/fragment_order_manager" />
+    <fragment
+        android:id="@+id/timeMachineFragment"
+        android:name="com.shuaijun.client.ui.time.TimeMachineFragment"
+        android:label="fragment_time_machine"
+        tools:layout="@layout/fragment_time_machine" />
+    <fragment
+        android:id="@+id/timePersonFragment"
+        android:name="com.shuaijun.client.ui.time.TimePersonFragment"
+        android:label="fragment_time_person"
+        tools:layout="@layout/fragment_time_person" />
+
+</navigation>
