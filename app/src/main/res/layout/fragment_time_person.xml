@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.time.TimePersonFragment"
     android:padding="16dp"
+    tools:context=".ui.time.TimePersonFragment"
     tools:viewBindingIgnore="false">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_fragment_time_person" />
 
 </FrameLayout>
