@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    app:cardCornerRadius="4dp"
-    android:layout_marginTop="4dp"
+    android:layout_marginTop="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@android:color/darker_gray"
+    app:cardBackgroundColor="#F3FAF8"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -18,7 +17,6 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="100"
-            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView
@@ -27,7 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="检测内容条目一"
-            android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

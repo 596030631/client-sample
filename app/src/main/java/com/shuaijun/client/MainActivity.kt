@@ -64,8 +64,16 @@ class MainActivity : AppCompatActivity() {
         drawerToggle.syncState()
 
 
+        binding.navView.setNavigationItemSelectedListener { item->
+            if (item.itemId == R.id.drawer_exit) {
+                finish()
+            }
+            true
+        }
+
         binding.layoutDrawer.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+
             }
 
             override fun onDrawerOpened(drawerView: View) {
@@ -110,6 +118,7 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     companion object {
         const val TAG = "MainActivity"
