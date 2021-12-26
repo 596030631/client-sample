@@ -5,6 +5,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\Administrator\\android\\client\\key.jks')
+            keyAlias 'sj'
+            storePassword '596030631'
+            keyPassword '596030631'
+        }
+        release {
+            storeFile file('C:\\Users\\Administrator\\android\\client\\key.jks')
+            keyAlias 'sj'
+            storePassword '596030631'
+            keyPassword '596030631'
+        }
+    }
     compileSdk 30
 
     defaultConfig {
@@ -12,9 +26,10 @@ android {
         minSdk 21
         targetSdk 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
@@ -36,6 +51,11 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "app-${versionName}.apk"
+        }
     }
 }
 
