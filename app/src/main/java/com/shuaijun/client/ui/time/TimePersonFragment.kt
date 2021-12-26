@@ -4,23 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.shuaijun.client.MainViewModel
 import com.shuaijun.client.databinding.FragmentTimePersonBinding
 import com.shuaijun.client.databinding.ItemFragmentTimePersonBinding
+import com.shuaijun.client.ui.BaseFragment
 import com.shuaijun.client.ui.util.MyAdapter
 import com.shuaijun.client.ui.util.VH
 
-class TimePersonFragment : Fragment() {
+class TimePersonFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = TimePersonFragment()
     }
 
-    private lateinit var viewModel: TimePersonViewModel
-    private lateinit var mainModel: MainViewModel
+    private lateinit var viewModel: TimeViewModel
     private lateinit var binding: FragmentTimePersonBinding
 
     override fun onCreateView(
@@ -35,12 +33,14 @@ class TimePersonFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(TimePersonViewModel::class.java)
-        mainModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TimeViewModel::class.java)
         mainModel.titleMessage.postValue("人工工时管理")
-        binding.recyclerview.layoutManager=LinearLayoutManager(requireContext())
+        mainModel.showMenu.postValue(booleanArrayOf(false, true, false, true))
+
+
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerview.adapter = MyAdapter(
-            viewModel.dataList,
+            viewModel.dataPersonList,
             { parent, _ ->
                 VH(
                     ItemFragmentTimePersonBinding.inflate(
@@ -51,9 +51,9 @@ class TimePersonFragment : Fragment() {
                 )
             },
             { holder, position ->
-                holder.binding.labelOrderId.text = viewModel.dataList[position].orderId
-                holder.binding.imgOrder.text = "$position"
-                holder.binding.labelOperator.setText(viewModel.dataList[position].operator)
+                holder.binding.imgOrder.text = String.format("%d", position + 1)
+                holder.binding.labelOrderId.text = viewModel.dataPersonList[position].orderId
+                holder.binding.labelOperator.text = viewModel.dataPersonList[position].operator
             }
         )
     }

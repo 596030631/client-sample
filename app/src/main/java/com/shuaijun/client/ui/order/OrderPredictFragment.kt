@@ -1,13 +1,17 @@
 package com.shuaijun.client.ui.order
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.shuaijun.client.MainViewModel
-import com.shuaijun.client.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.shuaijun.client.databinding.FragmentOrderPredictBinding
+import com.shuaijun.client.databinding.ItemFragmentOrderPredictBinding
+import com.shuaijun.client.ui.BaseFragment
+import com.shuaijun.client.ui.util.MyAdapter
+import com.shuaijun.client.ui.util.VH
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -17,11 +21,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [OrderPredictFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class OrderPredictFragment : Fragment() {
+class OrderPredictFragment : BaseFragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var mainModel:MainViewModel
+    private lateinit var binding: FragmentOrderPredictBinding
+    private lateinit var viewModel: OrderViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,15 +39,32 @@ class OrderPredictFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order_predict, container, false)
+        FragmentOrderPredictBinding.inflate(inflater, container, false).apply {
+            binding = this
+            return root
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mainModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         mainModel.titleMessage.postValue("订单预测管理")
+        mainModel.showMenu.postValue(booleanArrayOf(false, true, false, true))
+        viewModel = ViewModelProvider(requireActivity()).get(OrderViewModel::class.java)
+
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerview.adapter = MyAdapter(
+            viewModel.orderPredict,
+            { parent, viewType ->
+                VH(ItemFragmentOrderPredictBinding.inflate(layoutInflater, parent, false))
+            },
+            { holder, position ->
+                holder.binding.imgOrder.text = String.format("%d", position + 1)
+                holder.binding.labelOrderId.text = viewModel.orderPredict[position].id
+                holder.binding.labelOrderName.text = viewModel.orderPredict[position].name
+            }
+        )
     }
 
     companion object {

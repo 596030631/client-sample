@@ -12,4 +12,14 @@
     <string name="login_failed">"登录失败"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="menu_back">返回</string>
+    <string name="menu_save">提交</string>
+    <string name="menu_setting">设置</string>
+    <string name="drawer_default_name">Admin</string>
+    <string name="drawer_default_sub_title">XX部门</string>
+    <string name="drawer_forget">忘记密码</string>
+    <string name="drawer_sign_out">注销</string>
+    <string name="drawer_exit">退出</string>
+
 </resources>

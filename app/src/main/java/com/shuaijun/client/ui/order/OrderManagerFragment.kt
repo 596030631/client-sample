@@ -1,13 +1,17 @@
 package com.shuaijun.client.ui.order
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.shuaijun.client.MainViewModel
-import com.shuaijun.client.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.shuaijun.client.databinding.FragmentOrderManagerBinding
+import com.shuaijun.client.databinding.ItemFragmentOrderManagerBinding
+import com.shuaijun.client.ui.BaseFragment
+import com.shuaijun.client.ui.util.MyAdapter
+import com.shuaijun.client.ui.util.VH
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,11 +23,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [OrderManagerFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class OrderManagerFragment : Fragment() {
+class OrderManagerFragment : BaseFragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var mainModel:MainViewModel
+    private lateinit var binding: FragmentOrderManagerBinding
+    private lateinit var viewModel: OrderViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,15 +41,32 @@ class OrderManagerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order_manager, container, false)
+        FragmentOrderManagerBinding.inflate(inflater, container, false).apply {
+            binding = this
+            return binding.root
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mainModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(OrderViewModel::class.java)
         mainModel.titleMessage.postValue("订单管理")
+        mainModel.showMenu.postValue(booleanArrayOf(false, true, false))
+
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerview.adapter = MyAdapter(
+            viewModel.orderList,
+            { parent, viewType ->
+                VH(ItemFragmentOrderManagerBinding.inflate(layoutInflater, parent, false))
+            },
+            { holder, position->
+                holder.binding.imgOrder.text = String.format("%d", position + 1)
+                holder.binding.labelOrderId.text = viewModel.orderList[position].id
+                holder.binding.labelOrderName.text = viewModel.orderList[position].name
+            }
+        )
     }
 
     companion object {

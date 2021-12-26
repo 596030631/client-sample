@@ -12,8 +12,11 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/login_navigation_main"
-            app:destination="@id/mainFragment">
-        </action>
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"></action>
     </fragment>
 
     <fragment
@@ -22,19 +25,39 @@
         android:label="fragment_main">
         <action
             android:id="@+id/main_navigation_order_add"
-            app:destination="@id/orderAddFragment" />
+            app:destination="@id/orderAddFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/main_navigation_order_predict"
-            app:destination="@id/orderPredictFragment" />
+            app:destination="@id/orderPredictFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/main_navigation_order_manager"
-            app:destination="@id/orderManagerFragment" />
+            app:destination="@id/orderManagerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/main_navigation_time_person"
-            app:destination="@id/timePersonFragment" />
+            app:destination="@id/timePersonFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/main_navigation_time_machine"
-            app:destination="@id/timeMachineFragment" />
+            app:destination="@id/timeMachineFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment

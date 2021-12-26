@@ -17,12 +17,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.shuaijun.client.MainViewModel
 import com.shuaijun.client.R
 import com.shuaijun.client.databinding.FragmentLoginBinding
+import com.shuaijun.client.ui.BaseFragment
 
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
 
     private lateinit var loginViewModel: LoginViewModel
-    private lateinit var mainModel: MainViewModel
     private var _binding: FragmentLoginBinding? = null
 
     // This property is only valid between onCreateView and
@@ -126,7 +126,6 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mainModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         mainModel.titleMessage.postValue("用户登录")
     }
 

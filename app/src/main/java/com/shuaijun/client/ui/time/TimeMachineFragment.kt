@@ -1,13 +1,17 @@
 package com.shuaijun.client.ui.time
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.shuaijun.client.MainViewModel
-import com.shuaijun.client.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.shuaijun.client.databinding.FragmentTimeMachineBinding
+import com.shuaijun.client.databinding.ItemFragmentTimeMachineBinding
+import com.shuaijun.client.ui.BaseFragment
+import com.shuaijun.client.ui.util.MyAdapter
+import com.shuaijun.client.ui.util.VH
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,11 +23,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [TimeMachineFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TimeMachineFragment : Fragment() {
+class TimeMachineFragment : BaseFragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var mainModel:MainViewModel
+    private lateinit var binding: FragmentTimeMachineBinding
+    private lateinit var viewModel: TimeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,15 +41,38 @@ class TimeMachineFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_time_machine, container, false)
+        FragmentTimeMachineBinding.inflate(inflater, container, false).apply {
+            binding = this
+            return binding.root
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mainModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         mainModel.titleMessage.postValue("设备工时管理")
+        viewModel = ViewModelProvider(requireActivity()).get(TimeViewModel::class.java)
+        mainModel.showMenu.postValue(booleanArrayOf(false, true, false, true))
+
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerview.adapter = MyAdapter(
+            viewModel.dataMachineList,
+            { parent, _ ->
+                VH(
+                    ItemFragmentTimeMachineBinding.inflate(
+                        LayoutInflater.from(requireContext()),
+                        parent,
+                        false
+                    )
+                )
+            },
+            { holder, position ->
+                holder.binding.labelOrderId.text = viewModel.dataMachineList[position].orderId
+                holder.binding.imgOrder.text = "$position"
+                holder.binding.labelRoomName.text = viewModel.dataMachineList[position].roomName
+            }
+        )
     }
 
     companion object {

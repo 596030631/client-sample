@@ -43,28 +43,27 @@
 
 
             <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:orientation="vertical"
-                android:id="@+id/guideline"
-                app:layout_constraintGuide_percent="0.6" />
+                app:layout_constraintGuide_percent="0.60" />
 
             <TextView
-                android:id="@+id/label_operator"
+                android:id="@+id/label_order_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="操作人:张三"
+                android:text="订单金额:1000W"
                 app:layout_constraintStart_toStartOf="@id/guideline"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <TextView
-                android:id="@+id/label_operator_last"
+                android:id="@+id/label_room"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="最新操作人:张三三"
-                app:layout_constraintStart_toStartOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/label_operator" />
+                android:text="实验室:xxxxxxxxxx实验室"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_order_id" />
 
             <TextView
                 android:id="@+id/label_order_name"
@@ -72,24 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="订单名称:xxxxxxxxxx"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_order_id" />
-
-            <TextView
-                android:id="@+id/label_time_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="开始时间:2021-11-11 12:00"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_order_name" />
-
-            <TextView
-                android:id="@+id/label_time_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="结束时间:2021-11-12 13:13"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_time_start" />
-
+                app:layout_constraintTop_toBottomOf="@id/label_room" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
